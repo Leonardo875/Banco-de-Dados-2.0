@@ -8,18 +8,17 @@ create table tbl_funcionario(
 )
 
 create table tbl_reserva(
-        cd_reser int primary key identity,
+        no_passagem int primary key identity(1000,1),
 		tipo_voo varchar(20) not null,
 		local_orig varchar(20) not null,
 		local_dest varchar(20) not null,
-		adulto_reser varchar(2) not null,
-		menor_reser varchar(2) null,
-		nm_passaport varchar(10) foreign key references tbl_cliente(nm_passaport),
+		cd_cliente int foreign key references tbl_cliente(cd_cliente),
 
 )
 
 create table tbl_cliente(
-       nm_passaport varchar(10) primary key,
+       cd_cliente int primary key identity,
+	   no_passaport varchar(10),
 	   nm_cliente varchar(50),
 	   sg_sexo char(1)not null check(sg_sexo in('M','F')),
 	   no_cpf char(11) not null,
@@ -38,7 +37,7 @@ create table tbl_pacote(
 	   categ_hotel char(1) null,
 	   tipo_convenio varchar(20) null,
 	   passeio_pacot varchar(20) null,
-	   cd_reser int foreign key references tbl_reserva(cd_reser),
+	   no_passagem int foreign key references tbl_reserva(no_passagem),
 	  
 	   
 	 
@@ -49,7 +48,7 @@ create table tbl_agenda(
 	   dt_ida char(8) null,
 	   dt_volta char(8) null,
 	   diarias_agenda varchar(3) null,
-	   cd_reser int foreign key references tbl_reserva(cd_reser),
+	    no_passagem int foreign key references tbl_reserva(no_passagem),
 	   
 )
 
@@ -75,11 +74,6 @@ values ('Daniel','Daniel','123456')
 
 insert into tbl_funcionario(nm_func,ds_login,senha_login)
 values ('Leonardo','Leonardo','654321')
-
-
-
-
-
 
 
 --comandos 
